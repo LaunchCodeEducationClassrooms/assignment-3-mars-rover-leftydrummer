@@ -6,7 +6,7 @@ const Command = require('../command.js');
 //       However, do NOT edit the grading tests for any reason and make sure to un-comment out your code to get the autograder to pass.
 
 
-describe("Rover class", function() {
+describe("Rover class", function () {
 
     it("constructor sets position and default values for mode and generatorWatts", function () {
         let testRover = new Rover(111)
@@ -29,12 +29,18 @@ describe("Rover class", function() {
     it("responds correctly to status check command", function () {
         let testRover = new Rover(111)
         let testMsg = new Message("TEST", [new Command('STATUS_CHECK', '')])
-        expect(testRover.receiveMessage(testMsg).results).toContain(jasmine.objectContaining({roverStatus:{mode: testRover.mode, generatorWatts:testRover.generatorWatts, position:testRover.position}}))
+        expect(testRover.receiveMessage(testMsg).results).toContain(jasmine.objectContaining({
+            roverStatus: {
+                mode: testRover.mode,
+                generatorWatts: testRover.generatorWatts,
+                position: testRover.position
+            }
+        }))
     });
 
     it("responds correctly to mode change command", function () {
         let testRover = new Rover(111)
-        let testMsgLowPower = new Message("LowPower", [new Command('MODE_CHANGE','LOW_POWER')])
+        let testMsgLowPower = new Message("LowPower", [new Command('MODE_CHANGE', 'LOW_POWER')])
         expect(testRover.receiveMessage(testMsgLowPower).results[0].completed).toBeTrue()
         expect(testRover.mode).toEqual('LOW_POWER')
     });
